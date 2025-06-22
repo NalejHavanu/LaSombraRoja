@@ -5,83 +5,261 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>La Sombra Roja</title>
   <style>
-    body { font-family:'Georgia',serif; background:#0d0d0d; color:#e0e0e0; margin:0; }
-    nav  { background:#1a1a1a; display:flex; justify-content:center; padding:10px;
-           border-bottom:2px solid #cc0000; }
-    .nav-btn { background:#330000; color:#fff; border:none; cursor:pointer;
-               padding:10px 20px; margin:0 10px; font-size:16px; }
-    .nav-btn:hover { background:#cc0000; }
-    section{ display:none; padding:40px; max-width:900px; margin:auto; }
-    section.active{ display:block; }
-    h2 { border-bottom:2px solid #cc0000; padding-bottom:10px; }
-    img.gal { max-width:200px; border:2px solid #00d8ff; border-radius:10px;
-             cursor:pointer; transition:max-width .3s ease; margin:5px; }
-    img.gal.expanded { max-width:90%; }
-    .btn-form{ background:#cc0000; color:#fff; padding:12px 24px; border-radius:6px;
-               font-weight:bold; text-decoration:none; display:inline-block; margin-top:20px; }
-    .btn-form:hover{ background:#990000; }
+    /* Reset a základ */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
+      color: #f5f5f5;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      background: #2a0000;
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+      border-bottom: 3px solid #cc0000;
+      box-shadow: 0 4px 10px rgba(204, 0, 0, 0.7);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-btn {
+      background: transparent;
+      color: #f5f5f5;
+      border: 2px solid #cc0000;
+      cursor: pointer;
+      padding: 12px 28px;
+      margin: 0 15px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      box-shadow: 0 0 5px transparent;
+    }
+    .nav-btn:hover,
+    .nav-btn:focus {
+      background: #cc0000;
+      color: #1a0000;
+      box-shadow: 0 0 15px #cc0000;
+      outline: none;
+    }
+    section {
+      display: none;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 30px auto 60px auto;
+      background: rgba(20, 0, 0, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #cc0000aa;
+      line-height: 1.6;
+      font-size: 18px;
+      transition: opacity 0.4s ease;
+    }
+    section.active {
+      display: block;
+      animation: fadeIn 0.6s ease forwards;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    h2 {
+      border-bottom: 3px solid #cc0000;
+      padding-bottom: 12px;
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      color: #ff3333;
+      text-shadow: 0 0 10px #cc0000;
+    }
+    p {
+      margin-bottom: 18px;
+    }
+    /* Galerie */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    img.gal {
+      max-width: 220px;
+      border: 3px solid #00d8ff;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00d8ffaa;
+      object-fit: cover;
+    }
+    img.gal:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00d8ffdd;
+    }
+    img.gal.expanded {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-color: #cc0000;
+      box-shadow: 0 0 35px #cc0000ee;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      cursor: zoom-out;
+      border-radius: 20px;
+    }
+    /* Tlačítko na nábor */
+    .btn-form {
+      background: #cc0000;
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 30px;
+      font-size: 1.2rem;
+      letter-spacing: 1.5px;
+      box-shadow: 0 0 15px #cc0000cc;
+      transition: background-color 0.3s ease;
+    }
+    .btn-form:hover,
+    .btn-form:focus {
+      background: #990000;
+      box-shadow: 0 0 30px #990000cc;
+      outline: none;
+    }
+    /* Centrum obsahu - např. ikony Discordu */
+    .centered {
+      text-align: center;
+      margin-top: 25px;
+    }
+    .centered img {
+      filter: drop-shadow(0 0 5px #7289da);
+      transition: filter 0.3s ease;
+      cursor: pointer;
+    }
+    .centered img:hover {
+      filter: drop-shadow(0 0 15px #7289da);
+      transform: scale(1.15);
+    }
+    /* Responsivita */
+    @media (max-width: 600px) {
+      .nav-btn {
+        padding: 10px 18px;
+        font-size: 14px;
+        margin: 0 8px;
+      }
+      section {
+        padding: 30px 15px;
+        font-size: 16px;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      .btn-form {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+      img.gal {
+        max-width: 45vw;
+      }
+    }
   </style>
 </head>
 <body>
 
   <nav>
-    <button class="nav-btn" onclick="showSection('onas')">O nás</button>
-    <button class="nav-btn" onclick="showSection('clenstvi')">Nábor</button>
-    <button class="nav-btn" onclick="showSection('galerie')">Galerie</button>
+    <button class="nav-btn" onclick="showSection('onas')" aria-label="O nás">O nás</button>
+    <button class="nav-btn" onclick="showSection('clenstvi')" aria-label="Nábor">Nábor</button>
+    <button class="nav-btn" onclick="showSection('galerie')" aria-label="Galerie">Galerie</button>
   </nav>
 
   <!-- ============ O NÁS ============ -->
-  <section id="onas" class="active" onclick="openAnonymousImage()">
+  <section id="onas" class="active" tabindex="0" aria-live="polite" aria-label="Sekce o nás">
     <h2>O nás</h2>
     <p>
-      La Sombra Roja není jen kartel. Jsme stínem, který se plíží ulicemi, neviditelnou silou, která vládne podsvětí. Naše kořeny sahají hluboko do tajemství, kde respekt a loajalita mají cenu vyšší než zlato. Jsme organizace, která nezná slitování, ale ctí svůj vlastní kodex čestnosti věrnost, sílu a kontrolu nad každým koutem našeho území.
-
-Jsme bratrství, kde každý člen je nejen spolubojovníkem, ale i rodinou. La Sombra Roja je symbolem moci, strategie a nezlomné vůle tvoříme pravidla, po kterých se řídí podsvětí města. Naše jméno znamená červený stín, protože naše přítomnost je tichá, ale nevyhnutelná, a naše kroky zanechávají za sebou jen stopy ohně a respektu.
-
-Ať už je to obchod, ochrana, nebo správa našich zájmů, stojíme pevně jako skála. Jsme La Sombra Roja temná moc, která se nebojí přijmout svou roli ve světě, kde přežívají jen ti nejsilnější.
+      La Sombra Roja není jen kartel. Jsme stínem, který se plíží ulicemi, neviditelnou silou, která vládne podsvětí. Naše kořeny sahají hluboko do tajemství, kde respekt a loajalita mají cenu vyšší než zlato. Jsme organizace, která nezná slitování, ale ctí svůj vlastní kodex čestnosti, věrnost, sílu a kontrolu nad každým koutem našeho území.
+    </p>
+    <p>
+      Jsme bratrství, kde každý člen je nejen spolubojovníkem, ale i rodinou. La Sombra Roja je symbolem moci, strategie a nezlomné vůle – tvoříme pravidla, po kterých se řídí podsvětí města. Naše jméno znamená červený stín, protože naše přítomnost je tichá, ale nevyhnutelná, a naše kroky zanechávají za sebou jen stopy ohně a respektu.
+    </p>
+    <p>
+      Ať už je to obchod, ochrana, nebo správa našich zájmů, stojíme pevně jako skála. Jsme La Sombra Roja – temná moc, která se nebojí přijmout svou roli ve světě, kde přežívají jen ti nejsilnější.
     </p>
   </section>
 
   <!-- ============ NÁBOR ============ -->
-  <section id="clenstvi">
+  <section id="clenstvi" tabindex="0" aria-live="polite" aria-label="Sekce náboru">
     <h2>Nábor členů</h2>
     <p>🔻 La Sombra Roja přijímá nové tváře pouze výjimečně.</p>
     <p>🔻 Zajímají nás ti, kteří umí zachovat chladnou hlavu, ctí mlčenlivost a respektují řád.</p>
     <p>🔻 Pokud věříš, že máš na to stát se součástí stínu, připoj se k nám skrze Discord nebo anonymní přihlášku.</p>
 
-    <p style="text-align:center;">
-      <a href="https://discord.gg/tBhYhWrvMJ" target="_blank">
-        <img src="https://cdn3.emoji.gg/emojis/5542-discord-clyde-gif.gif" width="64" height="64" alt="Discord">
+    <div class="centered">
+      <a href="https://discord.gg/tBhYhWrvMJ" target="_blank" rel="noopener noreferrer" aria-label="Připojit se na Discord">
+        <img src="https://cdn3.emoji.gg/emojis/5542-discord-clyde-gif.gif" width="64" height="64" alt="Ikona Discordu">
       </a>
-    </p>
+    </div>
 
-    <p style="text-align:center;">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfmEvmQijBuY4fN3kY2LBBOpjChsEChFw8ZimSCtmfyqDcdvQ/viewform?usp=sharing&ouid=117769135485322841915" target="_blank" class="btn-form">
-        🩸Vyplň anonymní přihlášku🩸
+    <div class="centered">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfmEvmQijBuY4fN3kY2LBBOpjChsEChFw8ZimSCtmfyqDcdvQ/viewform?usp=sharing&ouid=117769135485322841915" target="_blank" rel="noopener noreferrer" class="btn-form" aria-label="Vyplnit anonymní přihlášku">
+        🩸 Vyplň anonymní přihlášku 🩸
       </a>
-    </p>
+    </div>
   </section>
 
   <!-- ============ GALERIE ============ -->
-  <section id="galerie">
+  <section id="galerie" tabindex="0" aria-live="polite" aria-label="Galerie obrázků">
     <h2>Galerie</h2>
     <p>📸 Dokumentace operací, vzpomínky z akcí, památky padlým bratřím.</p>
 
-    <img class="gal" src="https://i.imgur.com/jsFRYXZ.png" alt="Operace 1">
-    <img class="gal" src="https://i.imgur.com/hDibqX8.png"  alt="Vzpomínka">
+    <div class="gallery">
+      <img class="gal" src="https://i.imgur.com/jsFRYXZ.png" alt="Operace 1">
+      <img class="gal" src="https://i.imgur.com/hDibqX8.png"  alt="Vzpomínka">
+    </div>
   </section>
 
   <script>
     // Přepínání sekcí
     function showSection(id){
-      document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+      document.querySelectorAll('section').forEach(s => {
+        s.classList.remove('active');
+      });
       document.getElementById(id).classList.add('active');
+      // Scroll na začátek sekce pro lepší UX
+      document.getElementById(id).scrollIntoView({behavior:'smooth'});
     }
 
-    // Galerie zvětšení
-    document.addEventListener('click', e=>{
-      if(e.target.classList.contains('gal')){
+    // Galerie zvětšení a zmenšení
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('gal')) {
         e.target.classList.toggle('expanded');
+      } else {
+        // Pokud klikneš mimo obrázek zvětšený, zmenší se
+        document.querySelectorAll('img.gal.expanded').forEach(img => {
+          img.classList.remove('expanded');
+        });
+      }
+    });
+
+    // Podpora klávesy ESC pro zavření zvětšeného obrázku
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape'){
+        document.querySelectorAll('img.gal.expanded').forEach(img => {
+          img.classList.remove('expanded');
+        });
       }
     });
   </script>
