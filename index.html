@@ -75,55 +75,14 @@
     .btn-form:hover {
       background: #990000;
     }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-    }
-    .gallery img.gal {
-      max-width: 200px;
-      border: 2px solid #cc0000;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .gallery img.gal:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 10px #ff0000;
-    }
-    .gallery img.gal.expanded {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1.2);
-      max-width: 90vw;
-      max-height: 90vh;
-      z-index: 1001;
-      box-shadow: 0 0 30px #ff0000;
-      border: 3px solid #fff;
-    }
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 1000;
-    }
-    .overlay.active {
-      display: block;
-    }
-    @media (max-width: 600px) {
-      .nav-btn {
-        padding: 8px 14px;
-        font-size: 14px;
-        margin: 0 4px;
-      }
-      .gallery img.gal {
-        max-width: 100px;
-      }
+    iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      border: none;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px #000;
     }
   </style>
 </head>
@@ -131,18 +90,22 @@
   <nav>
     <button class="nav-btn" onclick="showSection('onas')">O nás</button>
     <button class="nav-btn" onclick="showSection('clenstvi')">Nábor</button>
-    <button class="nav-btn" onclick="showSection('galerie')">Galerie</button>
   </nav>
 
   <section id="onas" class="active">
     <h2>O nás</h2>
     <p>
-    La Sombra Roja není jen kartel. Jsme stínem, který se plíží ulicemi, neviditelnou silou, která vládne podsvětí. Naše kořeny sahají hluboko do tajemství, kde respekt a loajalita mají cenu vyšší než zlato. Jsme organizace, která nezná slitování, ale ctí svůj vlastní kodex čestnosti věrnost, sílu a kontrolu nad každým koutem našeho území.
-
-Jsme bratrství, kde každý člen je nejen spolubojovníkem, ale i rodinou. La Sombra Roja je symbolem moci, strategie a nezlomné vůle tvoříme pravidla, po kterých se řídí podsvětí města. Naše jméno znamená červený stín, protože naše přítomnost je tichá, ale nevyhnutelná, a naše kroky zanechávají za sebou jen stopy ohně a respektu.
-
-Ať už je to obchod, ochrana, nebo správa našich zájmů, stojíme pevně jako skála. Jsme La Sombra Roja  temná moc, která se nebojí přijmout svou roli ve světě, kde přežívají jen ti nejsilnější.
+      La Sombra Roja není jen kartel. Jsme stínem, který se plíží ulicemi, neviditelnou silou, která vládne podsvětí. Naše kořeny sahají hluboko do tajemství, kde respekt a loajalita mají cenu vyšší než zlato. Jsme organizace, která nezná slitování, ale ctí svůj vlastní kodex čestnosti, věrnosti, síly a kontroly nad každým koutem našeho území.
     </p>
+    <p>
+      Jsme bratrství, kde každý člen je nejen spolubojovníkem, ale i rodinou. La Sombra Roja je symbolem moci, strategie a nezlomné vůle. Tvoříme pravidla, po kterých se řídí podsvětí města. Naše jméno znamená červený stín, protože naše přítomnost je tichá, ale nevyhnutelná – a naše kroky zanechávají za sebou jen stopy ohně a respektu.
+    </p>
+    <p>
+      Ať už je to obchod, ochrana nebo správa našich zájmů, stojíme pevně jako skála. Jsme La Sombra Roja – temná moc, která se nebojí přijmout svou roli ve světě, kde přežívají jen ti nejsilnější.
+    </p>
+
+    <!-- Video vložené do sekce O nás -->
+    <iframe src="https://www.youtube.com/embed/fUN-RoXu5bQ" allowfullscreen></iframe>
   </section>
 
   <section id="clenstvi">
@@ -154,16 +117,6 @@ Ať už je to obchod, ochrana, nebo správa našich zájmů, stojíme pevně jak
         🩸 Vyplň anonymní přihlášku 🩸
       </a>
     </p>
-  </section>
-
-  <section id="galerie">
-    <h2>Galerie</h2>
-    <p>📸 Dokumentace operací. Památky padlým bratřím. Momentky z války i pokoje.</p>
-    <div class="gallery">
-      <img src="https://i.imgur.com/hDibqX8.png" alt="Operace 1" class="gal" />
-      <img src="https://i.imgur.com/jsFRYXZ.png" alt="Vzpomínka" class="gal" />
-    </div>
-    <div class="overlay" id="overlay"></div>
   </section>
 
   <script>
@@ -180,26 +133,6 @@ Ať už je to obchod, ochrana, nebo správa našich zájmů, stojíme pevně jak
         section.scrollIntoView({ behavior: 'smooth' });
       }
     }
-
-    const overlay = document.getElementById('overlay');
-
-    document.querySelectorAll('.gallery img.gal').forEach(img => {
-      img.addEventListener('click', () => {
-        const isExpanded = img.classList.contains('expanded');
-        document.querySelectorAll('.gallery img.gal.expanded').forEach(el => el.classList.remove('expanded'));
-        overlay.classList.remove('active');
-
-        if (!isExpanded) {
-          img.classList.add('expanded');
-          overlay.classList.add('active');
-        }
-      });
-    });
-
-    overlay.addEventListener('click', () => {
-      document.querySelectorAll('.gallery img.gal.expanded').forEach(el => el.classList.remove('expanded'));
-      overlay.classList.remove('active');
-    });
   </script>
 </body>
 </html>
