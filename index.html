@@ -5,56 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Sombra Roja</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Georgia', serif;
       background: url('https://i.imgur.com/jsFRYXZ.png') no-repeat center center fixed;
       background-size: cover;
-      color: #e0e0e0;
+      color: #e8e6e3;
+      line-height: 1.6;
     }
     nav {
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
       justify-content: center;
       padding: 12px;
-      border-bottom: 2px solid #cc0000;
+      border-bottom: 2px solid #a20000;
+      box-shadow: 0 0 10px #000;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
     .nav-btn {
-      background: #330000;
-      color: #fff;
-      border: none;
+      background: transparent;
+      color: #ffcccc;
+      border: 1px solid #cc0000;
       cursor: pointer;
       padding: 10px 20px;
       margin: 0 10px;
       font-size: 16px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
     }
     .nav-btn:hover {
       background: #cc0000;
+      color: #fff;
     }
     section {
       display: none;
-      padding: 40px;
-      max-width: 900px;
+      padding: 40px 20px;
+      max-width: 960px;
       margin: auto;
-      background: rgba(0, 0, 0, 0.75);
-      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 12px;
+      box-shadow: 0 0 25px #000;
+      margin-top: 30px;
     }
     section.active {
       display: block;
     }
     h2 {
-      border-bottom: 2px solid #cc0000;
+      border-bottom: 2px solid #a20000;
       padding-bottom: 10px;
+      font-size: 28px;
+      color: #ff4444;
     }
     .btn-form {
       background: #cc0000;
       color: #fff;
-      padding: 12px 24px;
+      padding: 14px 30px;
       border-radius: 6px;
       font-weight: bold;
       text-decoration: none;
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 25px;
+      transition: background 0.3s ease;
     }
     .btn-form:hover {
       background: #990000;
@@ -62,20 +78,52 @@
     .gallery {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 16px;
       justify-content: center;
     }
     .gallery img.gal {
       max-width: 200px;
-      border: 2px solid #00d8ff;
+      border: 2px solid #cc0000;
       border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery img.gal:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #ff0000;
     }
     .gallery img.gal.expanded {
-      max-width: 90%;
-      transform: scale(1.1);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.2);
+      max-width: 90vw;
+      max-height: 90vh;
+      z-index: 1001;
+      box-shadow: 0 0 30px #ff0000;
+      border: 3px solid #fff;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
       z-index: 1000;
+    }
+    .overlay.active {
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .nav-btn {
+        padding: 8px 14px;
+        font-size: 14px;
+        margin: 0 4px;
+      }
+      .gallery img.gal {
+        max-width: 100px;
+      }
     }
   </style>
 </head>
@@ -89,32 +137,35 @@
   <section id="onas" class="active">
     <h2>O nás</h2>
     <p>
-      La Sombra Roja není jen kartel. Jsme stínem, který se plíží ulicemi, neviditelnou silou, která vládne podsvětí. Naše kořeny sahají hluboko do tajemství, kde respekt a loajalita mají cenu vyšší než zlato. Jsme organizace, která nezná slitování, ale ctí svůj vlastní kodex čestnosti, věrnosti, síly a kontroly nad každým koutem našeho území.
+      <strong>La Sombra Roja</strong> není jen kartel. Jsme stín, který se plíží ulicemi, neviditelná síla podsvětí. Naše kořeny sahají hluboko do světa, kde respekt je silnější než zbraně.
     </p>
     <p>
-      Jsme bratrství, kde každý člen je nejen spolubojovníkem, ale i rodinou. La Sombra Roja je symbolem moci, strategie a nezlomné vůle. Tvoříme pravidla, podle kterých se řídí podsvětí města. Naše jméno znamená červený stín, protože naše přítomnost je tichá, ale nevyhnutelná – a naše kroky zanechávají za sebou jen stopy ohně a respektu.
+      Každý náš krok je strategický. Každé rozhodnutí má váhu. Ctíme kodex: věrnost, síla a absolutní kontrola nad naším územím.
+    </p>
+    <p>
+      Jsme rodina. Jsme La Sombra Roja.
     </p>
   </section>
 
   <section id="clenstvi">
     <h2>Nábor členů</h2>
-    <p>🔻 La Sombra Roja přijímá nové tváře pouze výjimečně.</p>
-    <p>🔻 Zajímají nás ti, kteří umí zachovat chladnou hlavu, ctí mlčenlivost a respektují řád.</p>
-    <p>🔻 Pokud věříš, že máš na to stát se součástí stínu, vyplň anonymní přihlášku.</p>
+    <p>🔻 Přijímáme výjimečné jedince. Ticho, respekt a oddanost jsou základem.</p>
+    <p>🔻 Pokud jsi připraven stát se součástí stínu, vyplň přihlášku.</p>
     <p style="text-align:center;">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSfmEvmQijBuY4fN3kY2LBBOpjChsEChFw8ZimSCtmfyqDcdvQ/viewform?usp=sharing&ouid=117769135485322841915" target="_blank" class="btn-form">
-        🩸Vyplň anonymní přihlášku🩸
+        🩸 Vyplň anonymní přihlášku 🩸
       </a>
     </p>
   </section>
 
   <section id="galerie">
     <h2>Galerie</h2>
-    <p>📸 Dokumentace operací, vzpomínky z akcí, památky padlým bratřím.</p>
+    <p>📸 Dokumentace operací. Památky padlým bratřím. Momentky z války i pokoje.</p>
     <div class="gallery">
       <img src="https://i.imgur.com/hDibqX8.png" alt="Operace 1" class="gal" />
       <img src="https://i.imgur.com/jsFRYXZ.png" alt="Vzpomínka" class="gal" />
     </div>
+    <div class="overlay" id="overlay"></div>
   </section>
 
   <script>
@@ -128,19 +179,28 @@
       if (section) {
         section.classList.add('active');
         section.style.display = 'block';
-        section.focus();
+        section.scrollIntoView({ behavior: 'smooth' });
       }
     }
 
+    const overlay = document.getElementById('overlay');
+
     document.querySelectorAll('.gallery img.gal').forEach(img => {
       img.addEventListener('click', () => {
-        if (img.classList.contains('expanded')) {
-          img.classList.remove('expanded');
-        } else {
-          document.querySelectorAll('.gallery img.gal.expanded').forEach(el => el.classList.remove('expanded'));
+        const isExpanded = img.classList.contains('expanded');
+        document.querySelectorAll('.gallery img.gal.expanded').forEach(el => el.classList.remove('expanded'));
+        overlay.classList.remove('active');
+
+        if (!isExpanded) {
           img.classList.add('expanded');
+          overlay.classList.add('active');
         }
       });
+    });
+
+    overlay.addEventListener('click', () => {
+      document.querySelectorAll('.gallery img.gal.expanded').forEach(el => el.classList.remove('expanded'));
+      overlay.classList.remove('active');
     });
   </script>
 </body>
