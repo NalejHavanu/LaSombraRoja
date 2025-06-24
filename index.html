@@ -5,26 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Sombra Roja</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap');
-
     * {
       box-sizing: border-box;
     }
     body {
       margin: 0;
-      font-family: 'Playfair Display', serif;
-      background: linear-gradient(to bottom, #0f0f0f 0%, #1c0000 100%), url('https://i.imgur.com/jsFRYXZ.png') no-repeat center center fixed;
+      font-family: 'Georgia', serif;
+      background: url('https://i.imgur.com/jsFRYXZ.png') no-repeat center center fixed;
       background-size: cover;
       color: #e8e6e3;
-      line-height: 1.7;
+      line-height: 1.6;
     }
     nav {
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
       justify-content: center;
-      padding: 14px;
+      padding: 12px;
       border-bottom: 2px solid #a20000;
-      box-shadow: 0 2px 15px #000;
+      box-shadow: 0 0 10px #000;
       position: sticky;
       top: 0;
       z-index: 999;
@@ -34,42 +32,38 @@
       color: #ffcccc;
       border: 1px solid #cc0000;
       cursor: pointer;
-      padding: 12px 24px;
+      padding: 10px 20px;
       margin: 0 10px;
       font-size: 16px;
       text-transform: uppercase;
       transition: all 0.3s ease;
-      border-radius: 6px;
-      letter-spacing: 1px;
     }
     .nav-btn:hover {
       background: #cc0000;
       color: #fff;
-      box-shadow: 0 0 10px #cc0000;
     }
     section {
       display: none;
-      padding: 50px 25px;
-      max-width: 1000px;
-      margin: 40px auto;
-      background: rgba(0, 0, 0, 0.88);
-      border-radius: 14px;
+      padding: 40px 20px;
+      max-width: 960px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 12px;
       box-shadow: 0 0 25px #000;
+      margin-top: 30px;
     }
     section.active {
       display: block;
-      animation: fadeIn 0.6s ease;
     }
     h2 {
       border-bottom: 2px solid #a20000;
       padding-bottom: 10px;
-      font-size: 30px;
+      font-size: 28px;
       color: #ff4444;
-      text-transform: uppercase;
-      letter-spacing: 2px;
     }
-    p {
-      font-size: 17px;
+    h3 {
+      margin-top: 30px;
+      font-size: 20px;
     }
     .btn-form {
       background: #cc0000;
@@ -79,33 +73,46 @@
       font-weight: bold;
       text-decoration: none;
       display: inline-block;
-      margin-top: 30px;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 25px;
+      transition: background 0.3s ease;
     }
     .btn-form:hover {
       background: #990000;
-      box-shadow: 0 0 12px #990000;
     }
-    iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    /* Responsivní video */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 poměr */
+      padding-top: 25px;
+      height: 0;
       margin-top: 30px;
-      border-radius: 10px;
+      border: 3px solid #cc0000;
+      border-radius: 12px;
       box-shadow: 0 0 15px #a20000;
+      overflow: hidden;
+      max-width: 100%;
+      background: #000;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .video-container iframe, 
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
       .nav-btn {
         padding: 8px 14px;
         font-size: 14px;
-        margin: 0 6px;
-      }
-      iframe {
-        height: 250px;
+        margin: 0 4px;
       }
     }
   </style>
@@ -119,18 +126,61 @@
   <section id="onas" class="active">
     <h2>O nás</h2>
     <p>
-      La Sombra Roja není jen kartel. Jsme stínem, který se plíží ulicemi, neviditelnou silou, která vládne podsvětí. Naše kořeny sahají hluboko do tajemství, kde respekt a loajalita mají cenu vyšší než zlato.
+      La Sombra Roja není jen kartel. Jsme stínem, který se plíží ulicemi, neviditelnou silou, která vládne podsvětí. Naše kořeny sahají hluboko do tajemství, kde respekt a loajalita mají cenu vyšší než zlato. Jsme organizace, která nezná slitování, ale ctí svůj vlastní kodex čestnosti věrnost, sílu a kontrolu nad každým koutem našeho území.
     </p>
     <p>
-      Jsme bratrství, kde každý člen je nejen spolubojovníkem, ale i rodinou. Naše jméno znamená červený stín – tichá, ale nevyhnutelná síla. Kroky, které zanecháváme, jsou stopou ohně, respektu a moci.
+      Jsme bratrství, kde každý člen je nejen spolubojovníkem, ale i rodinou. La Sombra Roja je symbolem moci, strategie a nezlomné vůle tvoříme pravidla, po kterých se řídí podsvětí města. Naše jméno znamená červený stín, protože naše přítomnost je tichá, ale nevyhnutelná, a naše kroky zanechávají za sebou jen stopy ohně a respektu.
     </p>
-    <iframe src="https://www.youtube.com/embed/TVxw6W6G9p0?rel=0" allowfullscreen></iframe>
+    <p>
+      Ať už je to obchod, ochrana, nebo správa našich zájmů, stojíme pevně jako skála. Jsme La Sombra Roja – temná moc, která se nebojí přijmout svou roli ve světě, kde přežívají jen ti nejsilnější.
+    </p>
+
+    <!-- Video container - zde vlož svůj odkaz na video -->
+    <div class="video-container">
+      <!-- YouTube embed příklad -->
+      <iframe 
+        src="https://youtu.be/UV76w57TT5s" 
+        title="La Sombra Roja Video" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
   </section>
 
   <section id="clenstvi">
     <h2>Nábor členů</h2>
-    <p>🔻 Přijímáme výjimečné jedince. Ticho, respekt a oddanost jsou základem.</p>
-    <p>🔻 Pokud jsi připraven stát se součástí stínu, vyplň přihlášku.</p>
+
+    <p style="font-size: 20px; color: #ff4444; font-weight: bold; text-align: center;">
+      🔴 LA SOMBRA ROJA NABÍRÁ NOVÉ ČLENY 🔴
+    </p>
+
+    <p style="text-align: center;">
+      Už tě nebaví bezduché střílení a nesmyslné Cayo RP? Hledáš frakci, kde má postava hloubku a vztahy mají váhu?
+    </p>
+
+    <p>
+      🩸 <strong>La Sombra Roja</strong> je tu pro ty, kteří chtějí dělat skutečné <strong>SOCIÁLNÍ RP</strong> – o rodině, respektu, loajalitě a moci.
+    </p>
+
+    <h3 style="color: #ff7777; border-bottom: 1px solid #a20000; padding-bottom: 4px;">⚖️ Co ti nabízíme:</h3>
+    <ul>
+      <li>🧱 Silné zázemí a jasnou frakční strukturu</li>
+      <li>🎭 <strong>KVALITNÍ SOCIÁLNÍ RP</strong> – nejsme tu kvůli počtu killů, ale kvůli příběhu</li>
+      <li>🤝 Možnost rozvíjet postavu skrze kontakty, konflikty, obchod i rodinu</li>
+      <li>🎓 Mentoring pro nové hráče a prostor pro seberealizaci</li>
+      <li>📈 Možnost růstu na základě loajality a aktivity</li>
+    </ul>
+
+    <h3 style="color: #ff7777; border-bottom: 1px solid #a20000; padding-bottom: 4px;">🧾 Požadavky:</h3>
+    <ul>
+      <li>🔞 Minimální věk 16+ (výjimky jen při vyspělém projevu)</li>
+      <li>🧠 Základy RP a znalost pravidel serveru</li>
+      <li>💬 Proaktivní přístup a chuť vytvářet silné příběhy</li>
+      <li>🚫 <strong>NECHCEME</strong> žádné trasheře, kropiče, Cayo závisláky ani kazitele RP</li>
+      <li>✅ Očekáváme úroveň, respekt a chuť budovat frakci – ne ji ničit</li>
+    </ul>
+
     <p style="text-align:center;">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSfmEvmQijBuY4fN3kY2LBBOpjChsEChFw8ZimSCtmfyqDcdvQ/viewform?usp=sharing" target="_blank" class="btn-form">
         🩸 Vyplň anonymní přihlášku 🩸
